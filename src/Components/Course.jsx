@@ -1,16 +1,16 @@
 import React from 'react';
+import MenuItem from './MenuItem';
 
 const Course = (props) => {
-    const {course_name, course} = props;
+    const {name, items} = props;
 
     return (
         <React.Fragment>
-            <h1>{course_name} - {course.length} items</h1>
-            {course.map( c => 
-                <span key={ c.id } style={{padding:'2px', border: '1px solid red'}}>
-                    {c.name}
-                </span>
+            <h1>{name} - {items.length} items</h1>
+            {items.map( i => 
+                <MenuItem key={Number(i.id) + 7} item={i} />
             )}
+            <hr />
         </React.Fragment>
     );
 }

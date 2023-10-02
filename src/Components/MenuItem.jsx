@@ -1,28 +1,15 @@
-// import React, {useState, useEffect, useRef} from 'react';
-// import Card from 'react-bootstrap/Card'
-// import Badge from 'react-bootstrap/Badge';
-// import ListGroup from 'react-bootstrap/ListGroup';
+import React from 'react';
 
-// const MenuItem = (props) => {
-//     const {menuItem} = props;
+const MenuItem = (props) => {
+    const {item} = props;
 
-//     return (
-//         <Card style={{width: "20rem"}}>
-//             <Card.Body>
-//                 <Card.Title className="d-flex justify-content-between">
-//                 {menuItem.name}
-//                 </Card.Title>
+    return (
+        <React.Fragment>
+            <span style={{border:'red 1px solid'}}>{item.name}</span><br />
+            <span style={{border:'red 1px solid'}}>{item.description}</span><br />
+            <span style={{border:'red 1px solid'}}>{item.price}</span><br /><br />
+        </React.Fragment>
+    )
+}
 
-//                 <p>{menuItem.description}</p>
-//                 <p>{menuItem.price}</p>
-//                 {/* <p>{{menuItem.description}}</p> */}
-//                 <ListGroup variant="flush">
-//                     {menuItem.description}
-//                     {menuItem.price}
-//                 </ListGroup>
-//             </Card.Body>
-//         </Card>
-//     )
-// }
-
-// export default MenuItem;
+export default MenuItem;
