@@ -88,6 +88,8 @@ const App = () => {
     console.log("Hello");
   }
 
+  // Add to menu, different types of food like permanent-specials or vegan-only dishes.
+
   return (
     <React.Fragment>
       <Navbar className="navbar-light bg-dark">

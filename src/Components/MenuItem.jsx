@@ -7,13 +7,15 @@ const MenuItem = (props) => {
 
     return (
         <React.Fragment>
-            <Card className='d-flex justify-content-between'>
-                <Card.Title>
-                <span style={{border:'red 1px solid'}}>{item.name}</span>
-                </Card.Title>
+            <Card className='d-flex justify-content-between'style={{width: "18rem"}} >
+                
                 <Card.Body>
-                    <span style={{border:'red 1px solid'}}>{item.description}</span><br></br>
-                    <span style={{border:'red 1px solid'}}>{item.price}</span>
+                <Card.Title>
+                {item.name}
+                </Card.Title>
+                    <Card.Text>{item.description}</Card.Text>
+                    
+                    <Card.Subtitle>${item.price} before tax</Card.Subtitle>
                 </Card.Body>
 
             </Card>
