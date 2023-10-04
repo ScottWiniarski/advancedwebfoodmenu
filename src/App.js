@@ -88,9 +88,11 @@ const App = () => {
 
   return (
     <React.Fragment>
-      <Navbar className="navbar-dark bg-dark">
+      <Navbar className="navbar-light bg-dark">
         <Container fluid>
+          <Navbar.Brand>
           Roadside Inn
+          </Navbar.Brand>
         </Container>
         <button onClick={AddToMenu}>Add to Menu</button>
         <hr></hr>
