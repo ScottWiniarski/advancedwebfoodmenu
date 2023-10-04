@@ -1,6 +1,8 @@
 import React, {useState, useEffect} from 'react';
 import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 import Course from './Components/Course';
 import './App.css';
 import { alignPropType } from 'react-bootstrap/esm/types';
@@ -99,11 +101,14 @@ const App = () => {
       </Navbar>
 
       <Container fluid>
+        <Col>
         <h3><span style={{fontWeight: 'bold'}}>Our Menu: </span></h3>
         {/* <h3>Our Menu</h3> */}
           { courses.map(c => 
             <Course key={c.id} items={c.items} name={c.name} addToMenu={AddToMenu}/>
           )}
+        </Col>
+        
       </Container>
 
     </React.Fragment>
