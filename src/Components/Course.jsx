@@ -6,7 +6,7 @@ import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 
 const Course = (props) => {
-    const {name, items, addToMenu} = props;
+    const {name, items, addToOrder} = props;
     const plural = items.length > 1 ? "s" : "";
 
     return (
@@ -17,7 +17,11 @@ const Course = (props) => {
             </h1>
             <Row>
             {items.map( i => 
-                <MenuItem key={Number(i.id) + 7} item={i} addToMenu={addToMenu} />
+                <MenuItem 
+                key={Number(i.id) + 7} 
+                item={i} 
+                addToOrder={addToOrder} 
+                />
             )}
             <hr />
             </Row>

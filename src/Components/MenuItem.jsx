@@ -1,10 +1,13 @@
 import React from 'react';
-import { CardBody, CardTitle } from 'react-bootstrap';
+import { Button, CardBody, CardTitle } from 'react-bootstrap';
 import Card from 'react-bootstrap/Card';
 
 const MenuItem = (props) => {
-    const {item, addToMenu} = props;
+    const {item, addToOrder} = props;
 
+    const release = (name) => {
+        console.log(name)
+    }
     return (
         <React.Fragment>
             <Card className='d-flex justify-content-between'style={{width: "18rem"}} >
@@ -16,7 +19,8 @@ const MenuItem = (props) => {
                     <Card.Text>{item.description}</Card.Text>
                     
                     <Card.Subtitle>${item.price} before tax</Card.Subtitle>
-                    <button className='justify-right' onClick={addToMenu}>Hello</button>
+                    <Button className='justify-right' onClick={() => addToOrder(item.name)}>Hello</Button>
+                    {/* <button className='justify-right' onClick={release(item.name)}>Hello</button> */}
                 </Card.Body>
 
             </Card>

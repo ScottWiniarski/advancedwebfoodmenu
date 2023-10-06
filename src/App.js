@@ -27,6 +27,12 @@ const App = () => {
             name: "Steak & Eggs",
             description: "This will fill you up",
             price: 12.59
+          },
+          {
+            id: 8,
+            name: "Meat Stew",
+            description: "It's got meat, and it ain't solid.",
+            price: 9.22
           }
         ]
       },
@@ -84,8 +90,17 @@ const App = () => {
     setCourses(mutableCourses);
   }, []);
 
-  const AddToMenu = () => {
-    console.log("Hello");
+  const [orders, setOrders] = useState([]);
+
+  useEffect(() => {
+    let mutableOrders = [
+
+    ]
+    setOrders(mutableOrders);
+  }, []);
+
+  const addToOrder = (itemName) => {
+    console.log(itemName);
   }
 
   // Add to menu, different types of food like permanent-specials or vegan-only dishes.
@@ -98,16 +113,21 @@ const App = () => {
           Roadside Inn
           </Navbar.Brand>
         </Container>
-        <button onClick={AddToMenu}>Add to Menu</button>
+        {/* <button onClick={AddToMenu}>Add to Menu</button> */}
         <hr></hr>
       </Navbar>
 
       <Container fluid>
+        {/* <Row>
+          <h3>Current Order:</h3>
+          { orders.map(o =>
+            <Course key={o.id} items={o.items}></Course>)}
+        </Row> */}
         <Col>
         <h3><span style={{fontWeight: 'bold'}}>Our Menu: </span></h3>
         {/* <h3>Our Menu</h3> */}
           { courses.map(c => 
-            <Course key={c.id} items={c.items} name={c.name} addToMenu={AddToMenu}/>
+            <Course key={c.id} items={c.items} name={c.name} addToOrder={addToOrder}/>
           )}
         </Col>
         
