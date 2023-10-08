@@ -4,6 +4,7 @@ import Card from 'react-bootstrap/Card';
 
 const MenuItem = (props) => {
     const {item, addToOrder} = props;
+    // const {item, passCourse} = props;
 
     const release = (name) => {
         console.log(name)
@@ -19,7 +20,7 @@ const MenuItem = (props) => {
                     <Card.Text>{item.description}</Card.Text>
                     
                     <Card.Subtitle>${item.price} before tax</Card.Subtitle>
-                    <Button className='justify-right' onClick={() => addToOrder(item.name)}>Hello</Button>
+                    <Button className='justify-right' onClick={() => addToOrder(item.id)}>Add To Order</Button>
                     {/* <button className='justify-right' onClick={release(item.name)}>Hello</button> */}
                 </Card.Body>
 

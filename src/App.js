@@ -4,8 +4,11 @@ import Navbar from 'react-bootstrap/Navbar';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Course from './Components/Course';
+import Order from './Components/Order';
+import Table from 'react-bootstrap/Table';
 import './App.css';
 import { alignPropType } from 'react-bootstrap/esm/types';
+import { Button } from 'react-bootstrap';
 
 const App = () => {
   const [courses, setCourses] = useState([]);
@@ -94,35 +97,102 @@ const App = () => {
 
   useEffect(() => {
     let mutableOrders = [
-
+      {
+        id: 1,
+        name: "Burger",
+        description: "Mushroom and Swiss Burger",
+        price: 8.99
+      },
+      {
+        id: 2,
+        name: "CheeseCake",
+        description: "When you need a sweet treat afterwards",
+        price: 4.88
+      },
     ]
     setOrders(mutableOrders);
   }, []);
 
-  const addToOrder = (itemName) => {
-    console.log(itemName);
+  const addToOrder = (itemid) => {
+    const mutableCourses = [...courses];
+    const idx = mutableCourses.findIndex(c => c.id === itemid);
+    console.log(mutableCourses[idx]);
+
+    const newOrders = [...orders];
+    newOrders.concat(mutableCourses[idx]);
+
+    //console.log(newOrders);
+    //setOrders(newOrders);
+    //console.log(newOrders);
+    
+    console.log(itemid);
   }
+
+  // const addToOrder = (itemid) => {
+  //   const mutableCourses = [...courses];
+  //   for(let i = 0; i<mutableCourses.length; i++ ){
+  //     console.log(i.name);
+  //     for(let j = 0; j< i.items.length; j++){
+  //       console.log(j.name);
+  //     }
+  //   }
+  //   console.log(itemName);
+  // }
+
+  // const addToOrder = (categoryid, itemName) => {
+  //   console.log(categoryid, itemName);
+  // }
 
   // Add to menu, different types of food like permanent-specials or vegan-only dishes.
 
+  const getOrderTotal = () => {
+    let orderSum = 0;
+    let mutableOrders = [...orders];
+    for(let i = 0; i < mutableOrders.length; i++){
+      orderSum += mutableOrders[i].price;
+    }
+
+    return orderSum.toFixed(2);
+  }
+
   return (
     <React.Fragment>
-      <Navbar className="navbar-light bg-dark">
+      {/* <Navbar className="navbar-light bg-dark"> */}
+      <Navbar bg='dark'>
         <Container fluid>
           <Navbar.Brand>
-          Roadside Inn
+            <span style={{color: 'white'}}>Roadside Inn</span>
+            
           </Navbar.Brand>
         </Container>
-        {/* <button onClick={AddToMenu}>Add to Menu</button> */}
-        <hr></hr>
+        <Button className='justify-right'>Add To Menu</Button>
       </Navbar>
 
       <Container fluid>
-        {/* <Row>
-          <h3>Current Order:</h3>
+      <h3><span style={{fontWeight: 'bold'}}>Current Order: </span></h3>
+        <Table striped bordered hover>
+          <thead>
+            <tr>
+              <th>Name</th>
+              {/* <th>Description</th> */}
+              <th>Price</th>
+            </tr>
+          </thead>
+          <tbody>
           { orders.map(o =>
-            <Course key={o.id} items={o.items}></Course>)}
-        </Row> */}
+            <Order 
+              key={o.id} 
+              name={o.name}
+              // description={o.description}
+              price={o.price}
+            ></Order>)}
+            <tr>
+              <td><span style={{fontWeight: 'bolder'}}>Order Total</span></td>
+              <td>${getOrderTotal()}</td>
+            </tr>
+          </tbody>
+        </Table>
+
         <Col>
         <h3><span style={{fontWeight: 'bold'}}>Our Menu: </span></h3>
         {/* <h3>Our Menu</h3> */}

@@ -9,6 +9,10 @@ const Course = (props) => {
     const {name, items, addToOrder} = props;
     const plural = items.length > 1 ? "s" : "";
 
+    // const passCourse = (itemid) => {
+    //     addToOrder(i.id, itemid)
+    // }
+
     return (
         <React.Fragment>
             
@@ -19,7 +23,8 @@ const Course = (props) => {
             {items.map( i => 
                 <MenuItem 
                 key={Number(i.id) + 7} 
-                item={i} 
+                item={i}
+                // passCourse={passCourse} 
                 addToOrder={addToOrder} 
                 />
             )}
