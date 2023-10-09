@@ -12,6 +12,7 @@ import { Button } from 'react-bootstrap';
 
 const App = () => {
   const [courses, setCourses] = useState([]);
+  const [orders, setOrders] = useState([]);
 
   useEffect(() => {
     let mutableCourses = [
@@ -91,41 +92,44 @@ const App = () => {
       // { id: 6, course: 'special', name: "Footlong Eclaire", description: "For a limited time", price: 13.88}, 
     ]
     setCourses(mutableCourses);
-  }, []);
 
-  const [orders, setOrders] = useState([]);
-
-  useEffect(() => {
     let mutableOrders = [
       {
         id: 1,
-        name: "Burger",
-        description: "Mushroom and Swiss Burger",
-        price: 8.99
+        courseidx: 0,
+        itemidx: 1,
+        qty: 2,
       },
       {
         id: 2,
-        name: "CheeseCake",
-        description: "When you need a sweet treat afterwards",
-        price: 4.88
+        courseidx: 1,
+        itemidx: 0,
+        qty: 1,
       },
     ]
     setOrders(mutableOrders);
   }, []);
 
   const addToOrder = (itemid) => {
-    const mutableCourses = [...courses];
-    const idx = mutableCourses.findIndex(c => c.id === itemid);
-    console.log(mutableCourses[idx]);
+    // console.log(itemid);
+    let itemidx = -1;
+    // let itemid = -1;
+    let courseidx = -1;
+    // let courseid = -1;
+    for(let i = 0; i < courses.length; i++){
+      itemidx = courses[i].items.findIndex(i => i.id === itemid);
+      if (itemidx > -1) { 
+        courseidx = i;
+        break; 
+      }
+    }
+    console.log(`course idx: ${courseidx}, itemidx: ${itemidx}`)
+    console.log(courses[courseidx].items[itemidx].name);
+    let mutableorders = [...orders];
+    const id = orders.length == 0 ? 1 : Math.max(...orders.map(o => o.id)) + 1;
+    mutableorders.push({id: id, qty: 1, itemidx: itemidx, courseidx: courseidx });
 
-    const newOrders = [...orders];
-    newOrders.concat(mutableCourses[idx]);
-
-    //console.log(newOrders);
-    //setOrders(newOrders);
-    //console.log(newOrders);
-    
-    console.log(itemid);
+    setOrders(mutableorders);
   }
 
   // const addToOrder = (itemid) => {
@@ -182,10 +186,10 @@ const App = () => {
           { orders.map(o =>
             <Order 
               key={o.id} 
-              name={o.name}
-              // description={o.description}
-              price={o.price}
-            ></Order>)}
+              name={courses[o.courseidx].items[o.itemidx].name}
+              price={courses[o.courseidx].items[o.itemidx].price}
+            ></Order>
+          )}
             <tr>
               <td><span style={{fontWeight: 'bolder'}}>Order Total</span></td>
               <td>${getOrderTotal()}</td>

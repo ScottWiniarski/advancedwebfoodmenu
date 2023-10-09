@@ -1,12 +1,13 @@
 import React from 'react';
 import Form from 'react-bootstrap/Form';
+import Modal from 'react-bootstrap/Modal';
 
 const NewMenuItem = () => {
 
     return(
-        <React.Fragment>
-            
-        </React.Fragment>
+        <Form>
+            <Form.Label></Form.Label>
+        </Form>
     )
 }
 
