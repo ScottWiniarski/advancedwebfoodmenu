@@ -9,6 +9,7 @@ import Table from 'react-bootstrap/Table';
 import './App.css';
 import { alignPropType } from 'react-bootstrap/esm/types';
 import { Button } from 'react-bootstrap';
+import NewMenuItem from './Components/NewMenuItem';
 
 const App = () => {
   const [courses, setCourses] = useState([]);
@@ -110,6 +111,10 @@ const App = () => {
     setOrders(mutableOrders);
   }, []);
 
+  const addToMenu = () => {
+
+  }
+
   const addToOrder = (itemid) => {
     let itemidx = -1;
     let courseidx = -1;
@@ -120,13 +125,25 @@ const App = () => {
         break; 
       }
     }
+    let inOrders = -1;
+    for(let i = 0; i < orders.length; i++){
+      if(orders[i].courseidx === courseidx && orders[i].itemidx === itemidx){
+        inOrders = i;
+        break;
+      }
+    }
     //console.log(`course idx: ${courseidx}, itemidx: ${itemidx}`)
     //console.log(courses[courseidx].items[itemidx].name, courses[courseidx].items[itemidx].price);
     let mutableorders = [...orders];
-    const id = orders.length == 0 ? 1 : Math.max(...orders.map(o => o.id)) + 1;
-    mutableorders.push({id: id, qty: 1, itemidx: itemidx, courseidx: courseidx });
-
-    setOrders(mutableorders);
+    if(inOrders != -1){
+      mutableorders[inOrders].qty++;
+      setOrders(mutableorders);
+    }
+    else{
+      const id = orders.length == 0 ? 1 : Math.max(...orders.map(o => o.id)) + 1;
+      mutableorders.push({id: id, qty: 1, itemidx: itemidx, courseidx: courseidx });
+      setOrders(mutableorders);
+    }   
   }
 
   // Add to menu, different types of food like permanent-specials or vegan-only dishes.
@@ -149,7 +166,7 @@ const App = () => {
         orderSum += mutableCourses[mutableOrders[i].courseidx].items[mutableOrders[i].itemidx].price;
       }
       // orderSum += subTotal;
-      console.log(orderSum);
+      // console.log(orderSum);
     }
     return orderSum.toFixed(2);
   }
@@ -164,7 +181,8 @@ const App = () => {
             
           </Navbar.Brand>
         </Container>
-        <Button className='justify-right'>Add To Menu</Button>
+        <NewMenuItem></NewMenuItem>
+        {/* <Button className='justify-right'>Add To Menu</Button> */}
       </Navbar>
 
       <Container fluid>
