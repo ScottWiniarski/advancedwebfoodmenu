@@ -111,11 +111,8 @@ const App = () => {
   }, []);
 
   const addToOrder = (itemid) => {
-    // console.log(itemid);
     let itemidx = -1;
-    // let itemid = -1;
     let courseidx = -1;
-    // let courseid = -1;
     for(let i = 0; i < courses.length; i++){
       itemidx = courses[i].items.findIndex(i => i.id === itemid);
       if (itemidx > -1) { 
@@ -123,8 +120,8 @@ const App = () => {
         break; 
       }
     }
-    console.log(`course idx: ${courseidx}, itemidx: ${itemidx}`)
-    console.log(courses[courseidx].items[itemidx].name);
+    //console.log(`course idx: ${courseidx}, itemidx: ${itemidx}`)
+    //console.log(courses[courseidx].items[itemidx].name, courses[courseidx].items[itemidx].price);
     let mutableorders = [...orders];
     const id = orders.length == 0 ? 1 : Math.max(...orders.map(o => o.id)) + 1;
     mutableorders.push({id: id, qty: 1, itemidx: itemidx, courseidx: courseidx });
@@ -132,30 +129,28 @@ const App = () => {
     setOrders(mutableorders);
   }
 
-  // const addToOrder = (itemid) => {
-  //   const mutableCourses = [...courses];
-  //   for(let i = 0; i<mutableCourses.length; i++ ){
-  //     console.log(i.name);
-  //     for(let j = 0; j< i.items.length; j++){
-  //       console.log(j.name);
-  //     }
-  //   }
-  //   console.log(itemName);
-  // }
-
-  // const addToOrder = (categoryid, itemName) => {
-  //   console.log(categoryid, itemName);
-  // }
-
   // Add to menu, different types of food like permanent-specials or vegan-only dishes.
 
   const getOrderTotal = () => {
     let orderSum = 0;
+    let subTotal = 0;
     let mutableOrders = [...orders];
+    let mutableCourses = [...courses];
     for(let i = 0; i < mutableOrders.length; i++){
-      orderSum += mutableOrders[i].price;
+      // console.log(mutableOrders[i].courseidx, mutableOrders[i].itemidx);
+      // if(mutableCourses[mutableOrders[i].courseidx].items[mutableOrders[i].itemidx]){
+      //   console.log(mutableCourses[mutableOrders[i].courseidx].items[mutableOrders[i].itemidx].name);
+      // }
+      if(mutableOrders[i].qty > 1){
+        subTotal = mutableCourses[mutableOrders[i].courseidx].items[mutableOrders[i].itemidx].price * mutableOrders[i].qty;
+        orderSum += subTotal;
+      }
+      else{
+        orderSum += mutableCourses[mutableOrders[i].courseidx].items[mutableOrders[i].itemidx].price;
+      }
+      // orderSum += subTotal;
+      console.log(orderSum);
     }
-
     return orderSum.toFixed(2);
   }
 
@@ -180,6 +175,7 @@ const App = () => {
               <th>Name</th>
               {/* <th>Description</th> */}
               <th>Price</th>
+              {/* <th className={"w-25"}>Quantity</th> */}
             </tr>
           </thead>
           <tbody>
@@ -188,6 +184,7 @@ const App = () => {
               key={o.id} 
               name={courses[o.courseidx].items[o.itemidx].name}
               price={courses[o.courseidx].items[o.itemidx].price}
+              quantity={o.qty}
             ></Order>
           )}
             <tr>

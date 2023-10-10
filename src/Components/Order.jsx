@@ -5,13 +5,14 @@ import Row from 'react-bootstrap/Row';
 
 const Order = (props) => {
     //const {name, description, price} = props;
-    const {name, price} = props;
+    const {name, price, quantity} = props;
 
     return(
         <React.Fragment>
             <tr>
-                <td>{name}</td>
+                <td><span style={{fontWeight:"bold"}}>{quantity > 1 ? "(" + quantity + "x)" : " " }</span> {name}</td>
                 <td>${price}</td>
+                {/* <td>{quantity}</td> */}
             </tr>                          
         </React.Fragment>
     );
