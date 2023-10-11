@@ -11,7 +11,7 @@ const MenuItem = (props) => {
     }
     return (
         <React.Fragment>
-            <Card className='d-flex justify-content-between'style={{width: "18rem"}} >
+            <Card className='d-flex justify-content-between m-2' style={{width: "18rem"}} >
                 
                 <Card.Body>
                 <Card.Title>

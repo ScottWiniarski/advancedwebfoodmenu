@@ -181,7 +181,8 @@ const App = () => {
             
           </Navbar.Brand>
         </Container>
-        <NewMenuItem></NewMenuItem>
+        {/* { courses.map()} */}
+        <NewMenuItem courses={courses} ></NewMenuItem>
         {/* <Button className='justify-right'>Add To Menu</Button> */}
       </Navbar>
 
@@ -193,7 +194,7 @@ const App = () => {
               <th>Name</th>
               {/* <th>Description</th> */}
               <th>Price</th>
-              {/* <th className={"w-25"}>Quantity</th> */}
+              {/* <th>Quantity</th> */}
             </tr>
           </thead>
           <tbody>

@@ -7,8 +7,11 @@ import Toast from 'react-bootstrap/Toast';
 import ToastContainer from 'react-bootstrap/ToastContainer';
 
 const NewMenuItem = (props) => {
+    const {courses} = props;
+
     const [ showModal, setShowModal ] = useState(false);
     const [ newMenuItem, setNewMenuItem] = useState("");
+    const [ newItemCourseId, setnewItemCourseId] = useState();
 
     const handleModalClose = () => setShowModal(false);
     const handleModalShow = () => {
@@ -39,10 +42,14 @@ const NewMenuItem = (props) => {
                             autoFocus
                             autoComplete='off'
                         />
-                        <Form.Control
+                        <Form.Select
                             type='select'
                             name='newItemCategory'
-                        />
+                             onChange={ (e) => setnewItemCourseId(e.target.value) }
+                             value={ newItemCourseId }>
+                            {courses.map(c =>
+                                <option key={c.id} value={c.id}>{c.name}</option>)} 
+                        </Form.Select>
                     </Form.Group>
                 </Modal.Body>
                 <Modal.Footer>
