@@ -151,6 +151,7 @@ const App = () => {
 
   const getOrderTotal = () => {
     let orderSum = 0;
+    let subTotal = 0;
     let mutableOrders = [...orders];
     let mutableCourses = [...courses];
     for(let i = 0; i < mutableOrders.length; i++){
