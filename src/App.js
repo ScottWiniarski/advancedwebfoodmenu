@@ -154,10 +154,20 @@ const App = () => {
     let mutableOrders = [...orders];
     let mutableCourses = [...courses];
     for(let i = 0; i < mutableOrders.length; i++){
-      //console.log(mutableCourses[mutableOrders[i].itemidx].price);
-      orderSum += mutableOrders[i].price;
+      // console.log(mutableOrders[i].courseidx, mutableOrders[i].itemidx);
+      // if(mutableCourses[mutableOrders[i].courseidx].items[mutableOrders[i].itemidx]){
+      //   console.log(mutableCourses[mutableOrders[i].courseidx].items[mutableOrders[i].itemidx].name);
+      // }
+      if(mutableOrders[i].qty > 1){
+        subTotal = mutableCourses[mutableOrders[i].courseidx].items[mutableOrders[i].itemidx].price * mutableOrders[i].qty;
+        orderSum += subTotal;
+      }
+      else{
+        orderSum += mutableCourses[mutableOrders[i].courseidx].items[mutableOrders[i].itemidx].price;
+      }
+      // orderSum += subTotal;
+      // console.log(orderSum);
     }
-
     return orderSum.toFixed(2);
   }
 
